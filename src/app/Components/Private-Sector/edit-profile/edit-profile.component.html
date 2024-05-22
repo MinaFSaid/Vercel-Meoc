@@ -1,0 +1,120 @@
+<div class="contaner-fluid p-4">
+    <div class="container-fluid">
+        <div class="editProfile">Edit Profile</div>
+        <div class="card m-2">
+            <div *ngIf="isloading">
+                <div class="col-12 d-flex flex-column justify-content-center align-items-center pt-5">
+                    <!-- <div class="col-5 d-flex justify-content-center"> -->
+                    <div class="col-6 circular_image my-5">
+                        <img class="" src="../../../../assets/Images/userd.jpeg" width="100%">
+                    </div>
+                    <div class="col-2 d-flex flex-column justify-content-center">
+                        <button class="btn rounded-4 mb-3" style="color: #02455A; border-color: #02455A;">Upload
+                            Photo</button>
+                        <button class="btn mb-3" style="color:#02455A;">Remove</button>
+                    </div>
+                    <!-- </div> -->
+                    <!-- <div class="">
+                    <div class="vr" style="height: 8rem;"></div>
+                </div> -->
+                    <!-- <div class="col-5 d-flex flex-column justify-content-center px-5">
+                    <div class="imgReq">Image requirments:</div>
+                    <div class="imgRole">1- Min. 400 x 400px</div>
+                    <div class="imgRole">2- Max. 2MB</div>
+                    <div class="imgRole">3- Your face or company logo</div>
+                </div> -->
+                </div>
+                <div class="col-12 py-3">
+                    <form [formGroup]="editProfileData">
+                        <div class=" d-flex justify-content-around">
+                            <div class="col-4 p-2">
+                                <label for="userName" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="userName" formControlName="userName">
+                            </div>
+                            <div class="col-4 p-2">
+                                <label for="isActive" class="form-label badge" >Is Active</label>
+                                <input type="isActive" class="form-control" id="isActive"
+                                    formControlName="isActive">
+                                    <br>
+                            </div>
+                        </div>
+                        <div class=" d-flex justify-content-around">
+                            <div class="col-4 p-2">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                            </div>
+                            <div class="col-4 p-2">
+                                <label for="familyName" class="form-label">Family Name</label>
+                                <input type="email" class="form-control" id="familyName"
+                                    formControlName="familyName"><br>
+                            </div>
+                        </div>
+                        <div class=" d-flex justify-content-around">
+                            <div class="col-4 p-2">
+                                <label for="fullName" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" formControlName="fullName">
+                            </div>
+                            <div class="col-4 p-2">
+                                <label for="mail" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="mail" formControlName="mail"><br>
+                            </div>
+                        </div>
+                        <div class=" d-flex justify-content-around">
+                            <div class="col-4 p-2">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" id="phone" formControlName="phone"><br>
+                            </div>
+                            <div class="col-4 p-2">
+                                <label for="phone2" class="form-label">Another Phone</label>
+                                <input type="text" class="form-control" id="phone2" formControlName="phone2">
+                            </div>
+                        </div>
+                        <div class=" d-flex justify-content-around">
+                            <div class="col-4 p-2">
+                                <label for="governorate" class="form-label">Governorate</label>
+                                <input type="text" class="form-control" id="governorate"
+                                    formControlName="governorate"><br>
+                            </div>
+                            <div class="col-4 p-2">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="address" formControlName="address">
+                            </div>
+                        </div>
+                        <div class=" d-flex justify-content-around">
+                            <div class="col-4 p-2">
+                                <label for="birthDate" class="form-label">Birth Date</label>
+                                <input type="email" class="form-control" id="birthDate" aria-describedby="emailHelp"
+                                    formControlName="birthDate">
+                            </div>
+                            <div class="col-4 p-2 d-flex flex-column justify-content-center">
+                                <span for="exampleInputPassword1" class="form-label col-6">Gender</span>
+                                <div class="col-6 d-flex justify-content-around align-items-end ">
+                                    <input id="male" type="radio" class="custom-control-input" value="0" name="gender"
+                                        formControlName="gender" [checked]="isChecked">
+                                    <div>Male</div>
+                                    <input id="female" type="radio" class="custom-control-input" value="1" name="gender"
+                                        formControlName="gender" [checked]="!isChecked">
+                                    <div>Female</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="col-12 d-flex justify-content-center mb-5">
+                    <button class="btn saveEdit px-5" (click)="update()">Save Edit</button>
+                </div>
+            </div>
+            <div *ngIf="!isloading" class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+                <div class="spinner-border" role="status" style="color: #034C81;">
+                </div>
+            </div>
+        </div>
+        <div class="editProfile">Change Password</div>
+        <div class="card m-2">
+            <div *ngIf="isloading">
+            </div>
+        </div>
+    </div>
+</div>

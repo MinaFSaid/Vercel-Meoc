@@ -1,0 +1,48 @@
+#askedSec{
+  padding-top: 5rem;
+  padding-bottom: 10rem;
+}
+.freqsec{
+  padding-bottom: 8rem;
+}
+.FrequentlyHeader {
+    font-family: Roboto;
+    font-size: 3.4rem;
+    font-weight: 500;
+  }
+  
+  .FrequentlyDetails {
+    color: #02455A;
+    font-family: Roboto;
+    font-size: 1.25rem;
+    font-weight: 400;
+    text-align: center;
+  }
+  
+  mat-panel-description {
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    font-size: 1.2rem;
+  }
+  
+  mat-accordion {
+    width: 60%;
+  }
+  
+  .line {
+    width:80%;
+    border-bottom: 1px solid #02455A;
+    opacity: .3;
+  }
+  .LearnMoreBtn{
+    border-radius: .8rem;
+    font-size: 1.2rem;
+    border-color: #02455a;
+    background-color: white;
+    box-shadow: none;
+  }
+  .LearnMoreBtn:hover{
+    background-color: #02455a;
+    color: white;
+  }

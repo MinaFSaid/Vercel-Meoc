@@ -1,0 +1,29 @@
+#difSec{
+  margin-bottom: 10rem;
+}
+.subheading-text {
+    align-self: stretch;
+
+    font-size: var(--text-medium-normal-size);
+    line-height: 150%;
+    color: #02455a;
+  }
+  .heading {
+    color: #0A0D13;
+    font-family: Roboto;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+  }
+  .LearnMoreBtn{
+    border-radius: .8rem;
+    font-size: 1.2rem;
+    width: 10rem;
+    border-color: #02455a;
+    background-color: white;
+    box-shadow: none;
+  }
+  .boximage{
+    width: 80%;
+  }
