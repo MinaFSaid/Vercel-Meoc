@@ -44,4 +44,40 @@ export class SubscriptionService {
     this.receptDetails = _receptDetails;
   }
 
+  getSubscriptions(){
+    const params = new HttpParams().set('userId', this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("userId")))
+    .set('tenantId', this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId")))
+    .set('countryId', this.countryId.toString());
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Abp.TenantId': `${this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))}`, // Set your custom header
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this._HttpClient.get<any>(`${this.baseUrl}/Subscription/GetSubscriptions`, {params, headers });
+  }
+
+  deletePendingSubscriptions(subId:any){
+    const body = {"userId": this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("userId")), "subscriptionId": subId}
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Abp.TenantId': `${this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))}`, // Set your custom header
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this._HttpClient.post<any>(`${this.baseUrl}/Subscription/DeleteSubscription`, body,{ headers });
+  }
+
+  PaySubscriptions(sub:any){
+    const body = {"userId": this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("userId")),
+     "subscriptionId": sub.subscriptionId,
+     "currencyId": sub.currencyId,
+     "tenantId": this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId")),
+     "countryId": this.countryId.toString()
+      }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Abp.TenantId': `${this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))}`, // Set your custom header
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this._HttpClient.post<any>(`${this.baseUrl}/Subscription/PaySubscription`, body,{ headers });
+  }
 }

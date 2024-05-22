@@ -158,9 +158,10 @@ export class PlanCustomizationComponent implements OnInit {
     if (billingType == 'annually') {
       this.monthly = false;
       this.displayTotalPrice = Math.floor(this.displayTotalPrice * 12 * 0.7);
+      console.log(this.displayTotalPrice)
     } else if (billingType == 'monthly') {
       this.monthly = true;
-      this.displayTotalPrice = Math.floor(this.displayTotalPrice / (12 * 0.7));
+      this.displayTotalPrice = Math.round(this.displayTotalPrice / (12 * 0.7));
     }
   }
 

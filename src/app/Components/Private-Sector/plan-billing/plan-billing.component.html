@@ -1,67 +1,35 @@
 <div class="contaner-fluid p-4">
     <div class="container-fluid">
         <div class="PlanProfile">Plan & Billing</div>
-        <div class="card m-2 rounded-4 py-2">
+        <div *ngFor="let sub of subscriptions; let i = index" class="card m-2 rounded-4 py-2">
             <div class="col-12 d-flex justify-content-center py-3">
                 <div class="col-3 px-5">
                     <div class="smHeaders">Plan</div>
-                    <div class="xlBody">Premium Plan</div>
+                    <div class="xlBody">{{sub.planName}}</div>
                 </div>
                 <div class="col-3 px-5">
                     <div class="smHeaders">Payment</div>
-                    <div class="xlBody">LE 3000 <span class="smHeaders"> /month</span></div>
+                    <div class="xlBody">LE {{sub.totalSubscriptionPrice}} </div>
+                    <!-- <span class="smHeaders"> /month</span> -->
                 </div>
-                <div class="col-2 d-flex align-items-end">
-                    <div class="badge text-bg-success px-3">Active</div>
+                <div *ngIf="sub.isInvoiced == true" class="col-2 d-flex align-items-center">
+                    <div class="badge text-bg-success px-3">Invoiced</div>
                 </div>
-                <div class="col-2 d-flex justify-content-center align-items-end">
-                    <div class="me-4" style="color: red;">Cancel Subscription</div>
+                <div *ngIf="sub.isInvoiced == false" class="col-2 d-flex align-items-center">
+                    <div class="badge text-bg-danger px-3">pending</div>
                 </div>
-                <div class="col-2 d-flex align-items-end justify-content-end px-5">
-                    <div class="fw-bold" style="color:#02455A;">Upgrade</div>
+                <div *ngIf="sub.isInvoiced == false" class="col-2 d-flex justify-content-center align-items-center">
+                    <div class="me-4 btn" style="color: red;" (click)="showDelete(sub.subscriptionId, i)">Delete Subscription</div>
                 </div>
-            </div>
-            <div class="HLine"></div>
-
-            <div class="col-12 d-flex justify-content-center py-3">
-                <div class="col-3 px-5">
-                    <div class="smHeaderSec2 mb-3">Storage Used</div>
-                    <div class="xlBody">
-                        <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="10"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar overflow-visible text-dark" style="width: 60%;background-color: #034C81;"></div>
-                        </div>
-                    </div>
-                    <div class="smHeaders mt-3"><i class="bi bi-pie-chart pe-2"></i>3 GB (50%)</div>
+                <div *ngIf="sub.isInvoiced == true" class="col-2 d-flex justify-content-center align-items-center">
+                    <div class="me-4 btn" style="color: green;" (click)="getThisReceipt(sub)">Show Receipt</div>
                 </div>
-                <div class="col-3 px-5">
-                    <div class="smHeaderSec2 mb-3">Patient stored</div>
-                    <div class="xlBody">
-                        <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="10"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar overflow-visible text-dark" style="width: 40%;background-color: #034C81;"></div>
-                        </div>
-                    </div>
-                    <div class="smHeaders mt-3"><i class="bi bi-person-add pe-2"></i>1000 Patient (80%)</div>
+                <div class="col-2 d-flex justify-content-center align-items-center" *ngIf="sub.isInvoiced == true">
+                    <i class="bi bi-check-lg" style="color: green; font-size: 2rem;"></i>
                 </div>
-                <div class="col-3 px-5">
-                    <div class="smHeaderSec2 mb-3">Storage Used</div>
-                    <div class="xlBody">
-                        <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="10"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar overflow-visible text-dark" style="width: 90%;background-color: #034C81;"></div>
-                        </div>
-                    </div>
-                    <div class="smHeaders mt-3"><i class="bi bi-link-45deg pe-2"></i>3 Clinic (90%)</div>
+                <div class="col-2 d-flex justify-content-center align-items-center" *ngIf="sub.isInvoiced == false">
+                    <button class="btn" style="background-color: #E3F5FE;" (click)="paySubscription(sub, i)">Pay Now</button>
                 </div>
-                <div class="col-3 d-flex justify-content-center align-items-center">
-                    <div class="btn rounded-5" style="background-color:#034C81; color:white">Add Ons <i class="bi bi-plus-circle ps-2"></i></div>
-                </div>
-            </div>
-        </div>
-        <div class="row card m-2" style="height: 40vh;">
-            <div class="col-12">
-                Payment Method
             </div>
         </div>
     </div>
