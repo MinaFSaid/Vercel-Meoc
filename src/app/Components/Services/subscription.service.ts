@@ -8,7 +8,7 @@ import { EncryptDecryptService } from './encrypt-decrypt.service';
   providedIn: 'root'
 })
 export class SubscriptionService {
-  baseUrl: string = "http://41.196.137.6:5050";
+  baseUrl: string = "https://41.196.137.6:5050";
   token: any = "";
   countryId:any = this._EncryptDecryptService.decryptUsingAES256(sessionStorage.getItem("CountryId"));
   receptDetails:any = {};

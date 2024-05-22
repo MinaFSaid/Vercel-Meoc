@@ -9,7 +9,7 @@ import { EncryptDecryptService } from './encrypt-decrypt.service';
 })
 export class TenantService {
 
-  baseUrl:string = "http://41.196.137.6:5050";
+  baseUrl:string = "https://41.196.137.6:5050";
 
   constructor(private _HttpClient:HttpClient, private _EncryptDecryptService:EncryptDecryptService)
   {

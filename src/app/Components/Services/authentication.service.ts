@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private baseUrl = 'http://41.196.137.6:5050'; // API base URL
+  private baseUrl = 'https://41.196.137.6:5050'; // API base URL
   userAccessData = new BehaviorSubject<string | null>(null);
 
   constructor(private _HttpClient: HttpClient, private _EncryptDecryptService:EncryptDecryptService, private _Router:Router) {

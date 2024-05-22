@@ -7,7 +7,7 @@ import { EncryptDecryptService } from './encrypt-decrypt.service';
   providedIn: 'root'
 })
 export class PlanPricesService {
-  baseUrl: string = "http://41.196.137.6:5050";
+  baseUrl: string = "https://41.196.137.6:5050";
   planIdDetails:any;
   countryId:any = this._EncryptDecryptService.decryptUsingAES256(sessionStorage.getItem("CountryId"));
   constructor(private _HttpClient: HttpClient, private _EncryptDecryptService: EncryptDecryptService) { }
