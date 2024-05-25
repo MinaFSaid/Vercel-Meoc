@@ -14,6 +14,8 @@ import { ReceiptsComponent } from './Components/Private-Sector/receipts/receipts
 import { PlanCustomizationComponent } from './Components/Public-Sector/plan-customization/plan-customization.component';
 import { AuthGuard } from './Components/guards/auth.guard';
 import { ReceiptDetailsComponent } from './Components/Private-Sector/receipt-details/receipt-details.component';
+import { SubscriptionManagmentComponent } from './Components/Private-Sector/subscription-managment/subscription-managment.component';
+import { AssignUsersComponent } from './Components/Private-Sector/assign-users/assign-users.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch:'full'},
@@ -31,6 +33,8 @@ const routes: Routes = [
     {path: 'plan-Billing', component: PlanBillingComponent},
     {path: 'receipts', component: ReceiptsComponent},
     {path: 'receipt', component: ReceiptDetailsComponent},
+    {path: 'subscription-managment', component: SubscriptionManagmentComponent},
+    {path: 'assign-users', component: AssignUsersComponent},
   ]},
   {path: '**', component: NotFoundComponent},
 

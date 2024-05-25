@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EncryptDecryptService } from '../../Services/encrypt-decrypt.service';
 import { PlanPricesService } from '../../Services/plan-prices.service';
 import { SubscriptionService } from './../../Services/subscription.service';
@@ -27,7 +27,8 @@ export class PlanCustomizationComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private _EncryptDecryptService: EncryptDecryptService,
     private _PlanPricesService: PlanPricesService,
-    private _SubscriptionService: SubscriptionService
+    private _SubscriptionService: SubscriptionService,
+    private _Router:Router
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
     const DecryptedId = this._EncryptDecryptService.decryptUsingAES256(this.id);
@@ -182,6 +183,7 @@ export class PlanCustomizationComponent implements OnInit {
       next: (data) => {
         // console.log(data);
         this.successAlert();
+        this._Router.navigate(['/profile/plan-Billing']);
       },
       error: (err) => {
         // console.log(err);

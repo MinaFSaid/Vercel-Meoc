@@ -12,6 +12,8 @@ export class SubscriptionService {
   token: any = "";
   countryId:any = this._EncryptDecryptService.decryptUsingAES256(sessionStorage.getItem("CountryId"));
   receptDetails:any = {};
+  planDetails:any = {};
+  UsersData:any = {};
 
   constructor(private _HttpClient: HttpClient, private _EncryptDecryptService: EncryptDecryptService) {
     this.token = localStorage.getItem('accessToken');
@@ -42,6 +44,12 @@ export class SubscriptionService {
 
   getReceiptDetails(_receptDetails:any){
     this.receptDetails = _receptDetails;
+  }
+  getPlanDetails(_planDetails:any){
+    this.planDetails = _planDetails;
+  }
+  assignUsers(_user:any){
+    this.UsersData = _user;
   }
 
   getSubscriptions(){
@@ -79,5 +87,56 @@ export class SubscriptionService {
       'Authorization': `Bearer ${this.token}`
     });
     return this._HttpClient.post<any>(`${this.baseUrl}/Subscription/PaySubscription`, body,{ headers });
+  }
+
+  GetSubscriptionClinics(subId:any){
+    const params = new HttpParams().set('SubscriptionId', subId);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Abp.TenantId': `${this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))}`, // Set your custom header
+      'Authorization': `Bearer ${this.token}`
+    });
+
+    return this._HttpClient.get<any>(`${this.baseUrl}/Subscription/GetSubscriptionClinics`, {params, headers });
+  }
+
+  GetUserRolesClinic(){
+    const params = new HttpParams().set('TenantId', this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId")));
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Abp.TenantId': `${this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))}`, // Set your custom header
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this._HttpClient.get<any>(`${this.baseUrl}/Subscription/GetUserRolesClinic`, {params, headers });
+  }
+
+  AssignUserToClinic(emailAddress:any,clinicId:any,userRoleId:any){
+    const body = {
+     "tenantId": parseInt(this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))),
+     "emailAddress": emailAddress,
+     "clinicId": clinicId,
+     "userRoleId": userRoleId,
+     "userIdAdd": parseInt(this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("userId")))
+      }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Abp.TenantId': `${this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))}`, // Set your custom header
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this._HttpClient.post<any>(`${this.baseUrl}/Subscription/AssignUserToClinic`,body ,{ headers });
+  }
+
+  GetClinicUsers(clinicId:any){
+    const params = new HttpParams().set('ClinicId', clinicId);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Abp.TenantId': `${this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))}`, // Set your custom header
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this._HttpClient.get<any>(`${this.baseUrl}/Subscription/GetClinicUsers`, {params, headers });
   }
 }

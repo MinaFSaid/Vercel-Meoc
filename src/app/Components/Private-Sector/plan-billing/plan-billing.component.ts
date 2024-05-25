@@ -16,15 +16,25 @@ constructor(private _SubscriptionService:SubscriptionService, private _Router: R
 
 loadData(){
   this._SubscriptionService.getSubscriptions().subscribe((subscript) => {
-    console.log(subscript.result);
     this.subscriptions = subscript.result
+    this.subscriptions.reverse();
   })
 }
 
-getThisReceipt(data: any) {
+getThisPlan(data: any) {
+  this._SubscriptionService.getPlanDetails(data);
+  this._Router.navigate(['/profile/subscription-managment']);
+}
+
+assignUsers(data:any) {
+  this._SubscriptionService.assignUsers(data);
+  this._Router.navigate(['/profile/assign-users']);
+}
+getReceiptDetails(data:any) {
   this._SubscriptionService.getReceiptDetails(data);
   this._Router.navigate(['/profile/receipt']);
 }
+
 
 deleteSubscription(id:any, i:any){
   this._SubscriptionService.deletePendingSubscriptions(id).subscribe({

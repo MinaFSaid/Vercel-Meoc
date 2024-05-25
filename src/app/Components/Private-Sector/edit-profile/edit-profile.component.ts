@@ -15,7 +15,7 @@ export class EditProfileComponent implements OnInit {
   isDisabled = true;
   editProfileData: FormGroup = new FormGroup({
     userId: new FormControl(null),
-    mail: new FormControl(null),
+    mail: new FormControl({value:null,disabled: true}),
     fullName: new FormControl(null),
     userName: new FormControl({value:null,disabled: true}),
     photoPath: new FormControl(null),

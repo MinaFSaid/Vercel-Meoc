@@ -36,7 +36,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { PlanCustomizationComponent } from './Components/Public-Sector/plan-customization/plan-customization.component';
 import { AuthService } from '../app/Components/Services/auth.service'; // Import AuthService
 import { AuthGuard } from './Components/guards/auth.guard';
-import { ReceiptDetailsComponent } from './Components/Private-Sector/receipt-details/receipt-details.component'; // Import AuthGuard
+import { ReceiptDetailsComponent } from './Components/Private-Sector/receipt-details/receipt-details.component';
+import { SubscriptionManagmentComponent } from './Components/Private-Sector/subscription-managment/subscription-managment.component';
+import { AssignUsersComponent } from './Components/Private-Sector/assign-users/assign-users.component'; // Import AuthGuard
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -64,6 +67,8 @@ import { ReceiptDetailsComponent } from './Components/Private-Sector/receipt-det
     ReceiptsComponent,
     PlanCustomizationComponent,
     ReceiptDetailsComponent,
+    SubscriptionManagmentComponent,
+    AssignUsersComponent,
 
   ],
   imports: [
@@ -76,7 +81,8 @@ import { ReceiptDetailsComponent } from './Components/Private-Sector/receipt-det
     MatTabsModule,
     ToastrModule.forRoot(),
     FormsModule,
-    CarouselModule
+    CarouselModule,
+    CommonModule 
 
   ],
   providers: [
