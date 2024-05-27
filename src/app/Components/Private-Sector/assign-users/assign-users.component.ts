@@ -21,7 +21,6 @@ export class AssignUsersComponent {
   constructor(private _SubscriptionService: SubscriptionService, private _Router:Router) {
     this.userdata = this._SubscriptionService.UsersData;
     this.id = this.userdata.subscriptionId;
-
     if (this.isDataEmpty(this.userdata)) {
       this._Router.navigate(['/profile/plan-Billing']);
     }else{
@@ -77,6 +76,7 @@ export class AssignUsersComponent {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedClinicId = Number(selectElement.value);
     // console.log(this.selectedClinicId);
+    
     this.getUsersClinic(this.selectedClinicId);
   }
 
@@ -109,7 +109,39 @@ export class AssignUsersComponent {
 
   getUsersClinic(id: any) {
     this._SubscriptionService.GetClinicUsers(id).subscribe((users) => {
-      this.clinicUsers = users.result;
+      console.log(users)
+      this.clinicUsers = users.result.reverse();
     })
+  }
+
+  deleteUser(id:any){
+    this._SubscriptionService.deleteUserFromClinic(id,this.selectedClinicId).subscribe((data)=>{
+      console.log(data);
+      
+    })
+  }
+
+
+
+
+  isModalVisible: boolean = false;
+  modalUserName:any;
+  showModal(name:any) {
+    this.modalUserName = name;
+    this.isModalVisible = true;
+  }
+
+  hideModal() {
+    this.isModalVisible = false;
+  }
+
+  accept() {
+    // Handle accept action
+    this.hideModal();
+  }
+
+  decline() {
+    // Handle decline action
+    this.hideModal();
   }
 }

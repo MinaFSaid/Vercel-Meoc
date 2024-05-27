@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validator, Validators } from '@angular/forms'
 import { SharedService } from '../../Services/shared.service';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {provideNativeDateAdapter} from '@angular/material/core';
 import Swal from 'sweetalert2'
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-edit-profile',
@@ -13,6 +18,9 @@ export class EditProfileComponent implements OnInit {
   isloading:boolean = false;
   isChecked:boolean = true;
   isDisabled = true;
+
+  selectedDate: Date; // Assuming you have this property to hold the selected date
+
   editProfileData: FormGroup = new FormGroup({
     userId: new FormControl(null),
     mail: new FormControl({value:null,disabled: true}),
@@ -37,11 +45,15 @@ export class EditProfileComponent implements OnInit {
     newPassword: new FormControl(null),
   });
 
-  constructor(private _SharedService: SharedService) {
+  constructor(private _SharedService: SharedService, private datePipe: DatePipe) {
+    this.selectedDate = new Date();
+  }
+
+  getUserData(){
     this._SharedService.getUserData().subscribe({
       next: (data) => {
         this._SharedService.currentUserData = data.result;
-        console.log(data.result)
+        // console.log(data.result)
         this.userData = data.result;
         if(this.userData.gender == 0){
           this.isChecked = true;
@@ -59,7 +71,7 @@ export class EditProfileComponent implements OnInit {
           isActive: this.userData.isActive,
           altMail: this.userData.altEmail,
           phone2: this.userData.phoneNumber2,
-          birthDate: this.userData.birthDate,
+          birthDate: this.UserDataPicker(this.userData.birthDate),
           firstName: this.userData.firstName,
           familyName: this.userData.familyName,
           governorate: this.userData.governorate,
@@ -67,14 +79,21 @@ export class EditProfileComponent implements OnInit {
           jobId: this.userData.jobId,
         });
         this.isloading = true;
+       
       },
       error: (err) => { this.showfail(err.error.error.message) }
     })
+  }
 
+  UserDataPicker(userdata:any){
+    const [day, month, year] = userdata.split('-');
+    const formattedDate = new Date(`${month}/${day}/${year}`);
+    this.selectedDate = formattedDate
+    return this.selectedDate;
   }
 
   ngOnInit(): void {
-
+    this.getUserData();
   }
 
   showSuccess() {

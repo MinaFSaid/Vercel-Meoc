@@ -25,8 +25,8 @@ export class SubscriptionService {
       'Content-Type': 'application/json',
       'Abp.TenantId': `${this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))}`, // Set your custom header
       'Authorization': `Bearer ${this.token}`
-
     });
+     
     return this._HttpClient.post<any>(`${this.baseUrl}/Subscription/CreateSubscription`, data, { headers });
   }
 
@@ -138,5 +138,27 @@ export class SubscriptionService {
       'Authorization': `Bearer ${this.token}`
     });
     return this._HttpClient.get<any>(`${this.baseUrl}/Subscription/GetClinicUsers`, {params, headers });
+  }
+
+
+
+  deleteUserFromClinic(userId:any, clinicId:any){
+    // const params = new HttpParams().set('userId', userId).set('clinicId', clinicId).set('userIdDelete',this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("userId")))
+    const body = {
+      "userId": userId,
+      "clinicId": clinicId,
+      "userIdDelete": this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("userId"))
+       }
+       const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Abp.TenantId': `${this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))}`, // Set your custom header
+        'Authorization': `Bearer ${this.token}`
+      });
+
+    const options = {
+      headers: headers,
+      body: body
+    };
+    return this._HttpClient.delete<any>(`${this.baseUrl}/Subscription/DeleteUserFromClinic`,options)
   }
 }

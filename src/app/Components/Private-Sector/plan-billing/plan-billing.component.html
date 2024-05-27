@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="PlanProfile">Plan & Billing</div>
         <div *ngFor="let sub of subscriptions; let i = index" class="card m-2 rounded-4 py-2">
-            <div class="col-12 d-flex justify-content-center py-3">
+            <div *ngIf="isBill" class="col-12 d-flex justify-content-center py-3">
                 <div class="col-3 px-5">
                     <div class="smHeaders">Plan</div>
                     <div class="xlBody">{{sub.planName}}</div>
@@ -32,6 +32,10 @@
                     <button class="btn" style="background-color: #E3F5FE;" (click)="paySubscription(sub, i)">Pay Now</button>
                 </div>
             </div>
+        </div>
+        <div *ngIf="!isBill" class="card m-2 rounded-4 py-2 d-flex align-items-center" style="height: 80vh;">
+            <i class="bi bi-clipboard-check" style="font-size: 20rem;opacity: .5;"></i>
+            <div class="xlBodysvg pb-4">No Plans Yet</div>
         </div>
     </div>
 </div>

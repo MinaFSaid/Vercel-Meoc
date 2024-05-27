@@ -45,10 +45,10 @@
                     </ng-template>
                     <div *ngIf="isLoading" class="spinner-border" role="status" style="color: #034C81;">
                     </div>
-                    <hr />
+                    <hr class="mt-2"/>
 
                 </form>
-                <button type="submit" class="btn googlebtn col-7">
+                <button type="submit" class="btn googlebtn d-flex justify-content-center align-items-center col-7">
                     <svg class="mx-2" width="21" height="21" viewBox="0 0 21 21" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -67,8 +67,8 @@
                     Sign in with Google</button>
             </div>
             <div class="d-flex flex-column align-items-center">
-                <div class="my-3"><a href="">Forgot your password?</a></div>
-                <div>Don't have an account?<a routerLink="/register">Sign Up</a></div>
+                <div class="my-3"><a href="" style="color: #034C81;">Forgot your password?</a></div>
+                <div>Don't have an account?<a routerLink="/register" style="color: #034C81;"> Sign Up</a></div>
             </div>
         </div>
         <div id="eyeBackground" class="col-5"></div>

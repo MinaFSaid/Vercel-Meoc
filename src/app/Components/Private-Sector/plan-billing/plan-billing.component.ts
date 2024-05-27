@@ -10,6 +10,7 @@ import Swal from 'sweetalert2'
 })
 export class PlanBillingComponent {
   subscriptions:any = [];
+  isBill:boolean = false;
 constructor(private _SubscriptionService:SubscriptionService, private _Router: Router,){
  this.loadData();
 }
@@ -18,6 +19,11 @@ loadData(){
   this._SubscriptionService.getSubscriptions().subscribe((subscript) => {
     this.subscriptions = subscript.result
     this.subscriptions.reverse();
+    if(this.subscriptions.length > 0){
+      this.isBill = true;
+    }else{
+      this.isBill = false;
+    }
   })
 }
 
@@ -41,6 +47,7 @@ deleteSubscription(id:any, i:any){
     next: (data) => {
       this.subscriptions.splice(i, 1);
       this.showSuccess("Subscription Deleted Successfully")
+      this.loadData()
     },
     error: (error) => {
       this.showfail("Can't Delete This Subscription")

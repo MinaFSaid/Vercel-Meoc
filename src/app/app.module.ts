@@ -40,6 +40,11 @@ import { ReceiptDetailsComponent } from './Components/Private-Sector/receipt-det
 import { SubscriptionManagmentComponent } from './Components/Private-Sector/subscription-managment/subscription-managment.component';
 import { AssignUsersComponent } from './Components/Private-Sector/assign-users/assign-users.component'; // Import AuthGuard
 import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -82,7 +87,11 @@ import { CommonModule } from '@angular/common';
     ToastrModule.forRoot(),
     FormsModule,
     CarouselModule,
-    CommonModule 
+    CommonModule ,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 
   ],
   providers: [
@@ -96,7 +105,8 @@ import { CommonModule } from '@angular/common';
       multi: true
     },
     AuthService, // Add AuthService to providers
-    AuthGuard // Add AuthGuard to providers
+    AuthGuard, // Add AuthGuard to providers
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
