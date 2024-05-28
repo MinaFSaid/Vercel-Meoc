@@ -10,7 +10,7 @@
                 <div class="col-3 px-5">
                     <div class="smHeaders">Payment</div>
                     <div class="xlBody">LE {{sub.totalSubscriptionPrice}} </div>
-                    <!-- <span class="smHeaders"> /month</span> -->
+ 
                 </div>
                 <div *ngIf="sub.isInvoiced == true" class="col-2 d-flex align-items-center" >
                     <div class="badge text-bg-success px-3" style="cursor: pointer;" (click)="getReceiptDetails(sub)">Invoiced</div>
@@ -25,7 +25,7 @@
                     <div class="me-4 btn" style="font-size: 1rem;" (click)="getThisPlan(sub)">Manage Plan</div>
                 </div>
                 <div class="col-2 d-flex justify-content-center align-items-center" *ngIf="sub.isInvoiced == true">
-                    <!-- <div class="me-4 btn" style="font-size: 1.8rem; color:green"><i class="bi bi-person-add"></i></div> -->
+
                     <button class="btn" style="background-color: #E3F5FE;" (click)="assignUsers(sub)"><i class="bi bi-person-add" style="font-size: 1.5rem;"></i></button>
                 </div>
                 <div class="col-2 d-flex justify-content-center align-items-center" *ngIf="sub.isInvoiced == false">

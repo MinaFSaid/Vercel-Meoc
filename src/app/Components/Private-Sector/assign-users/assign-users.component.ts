@@ -116,12 +116,27 @@ export class AssignUsersComponent {
 
   deleteUser(id:any){
     this._SubscriptionService.deleteUserFromClinic(id,this.selectedClinicId).subscribe((data)=>{
-      console.log(data);
-      
+      console.log(data.result);
+      this.showSuccess(data.result);
+      this.getUsersClinic(this.selectedClinicId);
     })
   }
 
-
+  showDelete(id:any){
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to delete this user from clinic!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "green",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deleteUser(id);
+      }
+    });
+  }
 
 
   isModalVisible: boolean = false;
