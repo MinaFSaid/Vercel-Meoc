@@ -1,0 +1,51 @@
+<div class="container d-flex justify-content-center flex-column mt-3 mb-5">
+    <div class="row py-5">
+        <div class="d-flex justify-content-center chooseYourPlan">
+            Choose your plan
+        </div>
+        <div class="d-flex justify-content-center my-3 px-3">
+            One software solution with everything you need
+        </div>
+    </div>
+    <div *ngIf="!isloading"  class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+        <div class="spinner-border" role="status" style="color: #034C81;">
+        </div>
+    </div>
+    <div *ngIf="isloading" class="row d-flex justify-content-center align-items-center">
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let plans of plans">
+                    <ng-template carouselSlide [id]="plans.planid">
+                        <div class="border rounded-md p-6 mx-3 my-3">
+                            <h3 class="text-2xl font-semibold mb-1" style="color: #02455A;">{{plans.planDescription}}</h3>
+                            <!-- <p class="text-sm text-gray-500">For Individuals and Small Teams</p> -->
+                            <div class="mt-6">
+                              <h3 class="text-2xl font-semibold">{{plans.totalPrice}} <sub class="text-gray-400 text-xs">per month</sub></h3>
+                            </div>
+                            <div class="mt-6">
+                              <h4 class="text-xl font-semibold mb-1">Include</h4>
+                              <ul class="mt-6 space-y-4 mb-2">
+                                <li *ngFor="let Feature of plans.planFeature" class="flex items-center text-sm text-gray-500">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+                                    <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" data-original="#000000" />
+                                  </svg>
+                                  {{Feature.featureDescription}}: {{Feature.minQuantity}} {{Feature.valueUnitDescription}}
+                                </li>
+                              </ul>
+                              <hr/>
+                              <ul class="mt-6 space-y-4">
+                                <li *ngFor="let Feature of plans.planAddOn" class="flex items-center text-sm text-gray-500">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" class="mr-3 fill-green-500" viewBox="0 0 24 24">
+                                    <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" data-original="#000000" />
+                                  </svg>
+                                  {{Feature.featureDescription}}: {{Feature.minQuantity}} {{Feature.valueUnitDescription}}
+                                </li>
+                              </ul>
+                              <button type="button" (click)="getThisPlan(plans.planId)" class="button w-full mt-6 px-2 py-2 text-sm font-semibold text-white bg-blue-500 hover:bg-blue-600 rounded-md">Buy now</button>
+                            </div>
+                          </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+    </div>
+    
+</div>

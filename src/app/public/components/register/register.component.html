@@ -1,0 +1,123 @@
+<div class="container-fluid">
+    <div class="row pageheight">
+        <div class="col-7 d-flex flex-column justify-content-center">
+            <div class="d-flex flex-column justify-content-center align-items-center mb-5">
+                <div class="header">MIDDLE EAST</div>
+                <div class="headerslogn">OPHTHALMIC CLINICS</div>
+            </div>
+            <div>
+                <h1 class="signIn">Sign up</h1>
+                <div class="signInSlogn">Nice to see you again</div>
+            </div>
+            <div class="d-flex flex-column justify-content-center align-items-center row py-4">
+                <form (ngSubmit)="handleSignUp(signUpForm)" [formGroup]="signUpForm" class=" d-flex flex-column align-items-center justify-content-center my-2">
+                    <div class="mb-3 col-7">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                            <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter your Name">
+                        </div>
+                        <div *ngIf="signUpForm.get('name')?.touched">
+                            <div *ngIf="signUpForm.get('name')?.hasError('required')" style="color: red;">UserName is required</div>
+                            <div *ngIf="signUpForm.get('name')?.hasError('minlength')" style="color: red;">UserName must be at least 3 characters long</div>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-7">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                            <input formControlName="emailAddress" type="email" class="form-control" id="email" placeholder="Enter your email">
+                        </div>
+                        <div *ngIf="signUpForm.get('emailAddress')?.touched">
+                            <div *ngIf="signUpForm.get('emailAddress')?.hasError('required')" style="color: red;">Email Address is required</div>
+                            <div *ngIf="signUpForm.get('emailAddress')?.hasError('email')" style="color: red;">Invalid email address</div>
+                          </div>
+                    </div>
+                    <div class="mb-1   col-7">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                            <input formControlName="password" type="{{togglePassword ? 'text': 'password'}}" class="form-control" id="password" placeholder="Enter your password">
+                            <button (click)="toggleShowPassword()" class="btn btn-outline-secondary" type="button">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div *ngIf="signUpForm.get('password')?.touched">
+                            <div *ngIf="signUpForm.get('password')?.hasError('required')" style="color: red;">Password is required</div>
+                            <div *ngIf="signUpForm.get('password')?.hasError('minlength')" style="color: red;">Password must be at least 6 characters long</div>
+                        </div>
+                    </div>
+                    <div class="mb-3 py-3 col-7">
+                        <div class="input-group">
+                            <!-- <span class="input-group-text"><i class="bi bi-phone-fill"></i></span> -->
+                            <button class="btn btn-outline-secondary dropdown-toggle d-flex justify-content-center align-items-center" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg class="pe-2" width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_729_2715)">
+                                    <mask id="mask0_729_2715" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="21" height="16">
+                                    <path d="M19 0.628174H2C0.89543 0.628174 0 1.5236 0 2.62817V13.6282C0 14.7327 0.89543 15.6282 2 15.6282H19C20.1046 15.6282 21 14.7327 21 13.6282V2.62817C21 1.5236 20.1046 0.628174 19 0.628174Z" fill="white"/>
+                                    </mask>
+                                    <g mask="url(#mask0_729_2715)">
+                                    <path d="M19 0.628174H2C0.89543 0.628174 0 1.5236 0 2.62817V13.6282C0 14.7327 0.89543 15.6282 2 15.6282H19C20.1046 15.6282 21 14.7327 21 13.6282V2.62817C21 1.5236 20.1046 0.628174 19 0.628174Z" fill="white"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 10.6282H21V15.6282H0V10.6282Z" fill="black"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0.628174H21V5.62817H0V0.628174Z" fill="#D0091E"/>
+                                    <path d="M19 1.12817H2C1.17157 1.12817 0.5 1.79975 0.5 2.62817V13.6282C0.5 14.4566 1.17157 15.1282 2 15.1282H19C19.8284 15.1282 20.5 14.4566 20.5 13.6282V2.62817C20.5 1.79975 19.8284 1.12817 19 1.12817Z" stroke="black" stroke-opacity="0.1"/>
+                                    </g>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_729_2715">
+                                    <rect width="21" height="15" fill="white" transform="translate(0 0.628174)"/>
+                                    </clipPath>
+                                    </defs>
+                                    </svg>
+
+                                    +02</button>
+                            <select class="dropdown-menu">
+                                <option><a class="dropdown-item" value="1">1</a></option>
+                                <option><a class="dropdown-item" value="2">2</a></option>
+                                <option><a class="dropdown-item" value="3">3</a></option>
+                            </select>
+                            <input formControlName="phone" type="number" class="form-control" aria-label="Text input with dropdown button">
+
+                        </div>
+                        <div *ngIf="signUpForm.get('phone')?.touched">
+                            <div *ngIf="signUpForm.get('phone')?.hasError('required')" style="color: red;">Phone No. is required</div>
+                        </div>
+                    </div>
+                    <!-- <sp *ngIf="errorDetails.length > 0" class="py-2" style="color: red;">{{errorDetails}}</sp
+                        an> -->
+                    <!-- <button *ngIf="!isLoading" type="submit" class="btn signinbtn col-7">Sign up</button> -->
+                    <ng-container *ngIf="!signUpForm.valid">
+                        <button *ngIf="!isLoading" type="submit" class="btn signinbtn col-7" disabled>Sign up</button>
+                    </ng-container>
+                    <ng-container *ngIf="signUpForm.valid">
+                        <button *ngIf="!isLoading" type="submit" class="btn signinbtn col-7">Sign up</button>
+                    </ng-container>
+
+                    <div *ngIf="isLoading" class="spinner-border" role="status" style="color: #034C81;">
+                    </div>
+                    <hr class="my-2"/>
+                    <div class="btn googlebtn col-7 d-flex justify-content-center align-items-center py-2 mt-2">
+                        <svg class="mx-2" width="21" height="21" viewBox="0 0 21 21" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M20.3684 10.7281C20.3693 10.0466 20.3113 9.3664 20.195 8.69482H10.6992V12.546H16.138C16.0267 13.1611 15.7911 13.7475 15.4455 14.2697C15.0999 14.792 14.6513 15.2393 14.1269 15.5848V18.0846H17.3728C19.2734 16.3444 20.3684 13.771 20.3684 10.7281Z"
+                                fill="#4285F4" />
+                            <path
+                                d="M10.6997 20.5C13.4169 20.5 15.7049 19.6139 17.3733 18.0862L14.1274 15.5864C13.2239 16.1947 12.0604 16.5419 10.6997 16.5419C8.07328 16.5419 5.84408 14.7836 5.04693 12.4143H1.70312V14.9906C2.5412 16.6467 3.82629 18.0389 5.41494 19.0118C7.00358 19.9847 8.83324 20.4999 10.6997 20.5Z"
+                                fill="#34A853" />
+                            <path
+                                d="M5.04686 12.4139C4.62543 11.1723 4.62543 9.82781 5.04686 8.58627V6.01001H1.70305C0.998032 7.40321 0.630859 8.94083 0.630859 10.5001C0.630859 12.0593 0.998032 13.5969 1.70305 14.9901L5.04686 12.4139Z"
+                                fill="#FBBC04" />
+                            <path
+                                d="M10.6997 4.45879C12.1356 4.43549 13.5231 4.97429 14.5623 5.95872L17.4362 3.10469C15.6139 1.40488 13.1996 0.471659 10.6997 0.500656C8.83324 0.500741 7.00358 1.01598 5.41494 1.98886C3.82629 2.96174 2.5412 4.35397 1.70312 6.0101L5.04693 8.58636C5.84408 6.21704 8.07328 4.45879 10.6997 4.45879Z"
+                                fill="#EA4335" />
+                        </svg>
+                        Sign Up with Google</div>
+                </form>
+
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <div>You already have account?<a routerLink="/signin" style="color: #034C81;"> Sign In</a></div>
+            </div>
+        </div>
+        <div id="eyeBackground" class="col-5"></div>
+    </div>
+</div>

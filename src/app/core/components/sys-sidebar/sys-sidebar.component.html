@@ -1,0 +1,100 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- ----------------------------------------------------------- -->
+    <div class="navbar navbar-expand-lg py-0">
+      <div class="container-fluid m-0 p-0 py-2">
+        <div class="row col-12">
+          <div class="logo col-2">
+            <div class="middle-east d-flex justify-content-center">MIDDLE EAST</div>
+            <div class="ophthalmic-clinics d-flex justify-content-center">OPHTHALMIC CLINICS</div>
+          </div>
+          <div class="tabs col-5 d-flex justify-content-center align-items-center">
+            <div class="nav-tab1 px-4">
+              <div class="" style="cursor: pointer;" routerLink="/home">Home</div>
+            </div>
+            <!-- <div class="nav-tab1 px-4">
+              <div class="" style="cursor: pointer;">About us</div>
+            </div> -->
+            <div class="nav-tab1 px-4">
+              <div class="" style="cursor: pointer;" routerLink="/Plans">Pricing</div>
+            </div>
+            <div class="nav-tab1 px-4">
+              <div class="" style="cursor: pointer;">Contact us</div>
+            </div>
+          </div>
+          <div *ngIf="!isLogin" class="col-3 d-flex align-items-center px-2 justify-content-center ">
+            <button class="button btn d-flex justify-content-center align-items-center px-3 py-1" routerLink="/signin">
+              Sign In
+            </button>
+          </div>
+          <div *ngIf="isLogin" class="col-3 d-flex align-items-center px-2 justify-content-center">
+              <div class="circular_image mx-2">
+                  <img src="../../../../assets/Images/userd.jpeg" width="100%"/>
+              </div>
+              <div>{{userName}}</div>
+              <div class="ms-4 d-flex">
+                  <i class="bi bi-gear" routerLink="/profile" style="cursor: pointer;"></i>
+              </div>
+              <div class="ms-5" style="cursor: pointer; color:red" (click)="logout()">SignOut</div>
+          </div>
+          <div class="col-2 d-flex justify-content-center align-items-center">
+              <div>
+                  <select class="form-select border-0" #ddlViewBy (change)="onSelectionChange()">
+                      <option *ngFor="let country of countryData" value="{{country.menuItemId}}">{{country.description}}</option>
+                    </select>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ----------------------------------------------------------- -->
+    <div class="row">
+      <div class="col-2 d-flex flex-column flex-shrink-0 p-3 sidebar "
+        style="height: 90vh; border-right:1px solid #9BA5B7;">
+        <a href="/" class="d-flex align-items-center justify-content-center pb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+          <svg class="bi me-2" width="40" height="32">
+            <use xlink:href="#bootstrap" />
+          </svg>
+          <span class="fs-4" style="color: #02455A; font-weight:bold ;"> <i class="bi bi-gear mx-2"></i>Setting</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a class="nav-link link-dark" aria-current="page" routerLink="/profile/edit-Profile"
+              routerLinkActive="active">
+              <i class="bi bi-person-circle me-2"></i>
+              Edit Profile
+            </a>
+          </li>
+          <li>
+            <a class="nav-link link-dark" aria-current="page" routerLink="/profile/plan-Billing"
+              routerLinkActive="active">
+              <i class="bi bi-cash-stack me-2"></i>
+              Plan & Billing
+            </a>
+          </li>
+          <li>
+            <a class="nav-link link-dark" routerLink="/profile/receipts" routerLinkActive="active">
+              <i class="bi bi-receipt me-2"></i>
+              Receipts
+            </a>
+          </li>
+        </ul>
+        <hr>
+        <div class="dropdown">
+
+          <strong class="btn d-flex justify-content-center" style="color: #02455A;" (click)="logout()">Sign Out</strong>
+
+        </div>
+      </div>
+
+      <div class="col-12 main-content d-flex justify-content-end mx-0">
+        <div class="col-10">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+<div class="receipt-content mb-5">
+    <div class="container bootstrap snippets bootdey">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="invoice-wrapper">
+					<div class="row d-flex justify-content-between">
+                        <div class="intro col-6">
+                            Hi <strong>{{data.customerName}}</strong>, 
+                            <br>
+                            This is the receipt for a payment of <strong>{{data.invoiceDisplayValue}}</strong> for your Plan.
+                        </div>
+                        <div class="col-4 d-flex flex-column align-items-end">
+                            <span *ngIf="data.invoiceStatus == 'Paid'" class="badge text-bg-success col-5">Success</span>
+                            <span *ngIf="data.invoiceStatus != 'Paid'" class="badge text-bg-danger col-5">Fail</span>
+                        </div>
+                    </div>
+
+					<div class="payment-info">
+						<div class="row">
+							<div class="col-sm-6">
+								<span>Transaction No.</span>
+								<strong>{{invoiceTransactions.transactionId}}</strong>
+                                <small>{{invoiceTransactions.paymentGateway}}</small>
+							</div>
+							<div class="col-sm-6 text-right">
+								<span>Payment Date</span>
+								<strong>{{invoiceTransactions.transactionDate | date:'medium'}}</strong>
+							</div>
+						</div>
+					</div>
+
+					<div class="payment-details">
+						<div class="row">
+							<div class="col-sm-6">
+								<span class="pb-3">Client</span>
+								<strong>
+									{{data.customerName}}
+								</strong>
+                                <p>{{invoiceTransactions.country}}</p>
+								<p>
+									{{data.customerMobile}} <br>
+									<a>
+										{{data.customerEmail}}
+									</a>
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="line-items">
+						<!-- <div class="headers clearfix">
+							<div class="row">
+								<div class="col-xs-4">Description</div>
+								<div class="col-xs-3">Quantity</div>
+								<div class="col-xs-5 text-right">Amount</div>
+							</div>
+						</div>
+						<div class="items">
+							<div class="row item">
+								<div class="col-xs-4 desc">
+									Html theme
+								</div>
+								<div class="col-xs-3 qty">
+									3
+								</div>
+								<div class="col-xs-5 amount text-right">
+									$60.00
+								</div>
+							</div>
+							<div class="row item">
+								<div class="col-xs-4 desc">
+									Bootstrap snippet
+								</div>
+								<div class="col-xs-3 qty">
+									1
+								</div>
+								<div class="col-xs-5 amount text-right">
+									$20.00
+								</div>
+							</div>
+							<div class="row item">
+								<div class="col-xs-4 desc">
+									Snippets on bootdey 
+								</div>
+								<div class="col-xs-3 qty">
+									2
+								</div>
+								<div class="col-xs-5 amount text-right">
+									$18.00
+								</div>
+							</div>
+						</div> -->
+						<div class="total text-right">
+							<p class="extra-notes">
+								<strong>Notes</strong>
+								<small>Payment Id: {{invoiceTransactions.paymentId}}</small> <br/>
+								<small>Transaction Id: {{invoiceTransactions.transactionId}}</small><br/>
+								<small>Transaction Status: {{invoiceTransactions.transactionStatus}}</small><br/>
+								<small>Card No: {{invoiceTransactions.cardNumber}}</small><br/>
+							</p>
+							<div class="field">
+								Subtotal <span>{{data.invoiceDisplayValue}}</span>
+							</div>
+							<div class="field grand-total">
+								Total <span>{{data.invoiceDisplayValue}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+                <div class="print d-flex justify-content-center my-4">
+                    <button class="btn btn-outline-dark" routerLink="/profile/plan-Billing">
+                        <i class="fa fa-print"></i>
+                        Back
+                    </button>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>

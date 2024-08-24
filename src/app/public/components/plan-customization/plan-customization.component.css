@@ -1,0 +1,88 @@
+.chooseYourPlan {
+    font-family: Roboto;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 3rem;
+    text-align: center;
+    color: #02455A;
+}
+
+.chooseYourPlanSlogn {
+    font-family: Roboto;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 2rem;
+    text-align: center;
+    color: #0A0D13;
+}
+
+.cardPlans{
+    font-family: Roboto;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 3rem;
+    text-align: center;
+    color: #02455A;
+}
+.cardPlansMo{
+    font-family: Roboto;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 3rem;
+    text-align: center;
+    color: #02455A;
+}
+.cardPlansMos{
+  font-family: Roboto;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 2rem;
+    text-align: center;
+    color: #969c9d;
+    text-decoration: underline;
+}
+.button {
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.3rem;
+    background: #02455A;
+    color: white;
+  }
+  .CardTabs{
+    display: flex;
+    justify-content: center;
+  }
+  .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: #02455A !important;
+
+  }
+  .mat-mdc-tab{
+    width: 30% !important;
+  }
+.inputs:focus:active{
+    outline: none !important;
+    border: none !important;
+    outline: none !important;
+}
+.feacturesDetails{
+font-size: 1rem;
+font-weight: 700;
+}
+.bg-color {
+  background-color:#EAF5FE;
+}
+.cardPlans{
+  font-family: Roboto;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 3rem;
+  text-align: center;
+  color: #02455A;
+}
+.cardPlansMo{
+  font-family: Roboto;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #02455A;
+}

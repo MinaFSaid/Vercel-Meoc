@@ -1,0 +1,215 @@
+<div class="contaner-fluid p-4">
+  <div class="container-fluid">
+    <div class="editProfile">Subscription Managment</div>
+    <div class="card m-2 rounded-4 py-2 d-flex align-items-center">
+
+      <div class="col-12 d-flex justify-content-center py-3 rounded-4 my-3">
+        <div class="col-4 px-5">
+          <div class="smHeaders">Plan</div>
+          <div class="xlBody">{{planDetails.planDescription}}</div>
+        </div>
+        <div class="col-4 px-5">
+          <div class="smHeaders">Payment</div>
+          <div class="xlBody">{{planDetails.totalSubscriptionPrice}}<span
+              class="smHeaders ps-2">{{planDetails.currencyDescription}} /month</span></div>
+        </div>
+        <div class="col-2 px-5">
+          <div class="smHeaders">Status</div>
+          <div *ngIf="!planDetails.isExpired" class="badge text-bg-success px-3 mt-3">Active</div>
+          <div *ngIf="planDetails.isExpired" class="badge text-bg-danger px-3 mt-3">Expired</div>
+        </div>
+      </div>
+
+      <div class="hLine"></div>
+
+      <div class="row col-12 d-flex justify-content-around px-4">
+        <div class="font-sans col-5 my-3">
+          <div class="d-flex justify-content-start editProfile py-2 fs-4">AddsOn</div>
+
+          <table class="mt-12 w-full border-collapse divide-y">
+
+            <thead class="whitespace-nowrap text-left">
+              <tr>
+
+                <th class="text-base text-gray-500 font-medium p-2"><span class="antialiased">Feature Name</span></th>
+                <th class="text-base text-gray-500 font-medium p-2"><span class="antialiased">Quantity</span></th>
+                <th class="text-base text-gray-500 font-medium p-2">Price</th>
+                <th class="text-base text-gray-500 font-medium p-2"></th>
+              </tr>
+            </thead>
+
+            <tbody class="whitespace-nowrap divide-y">
+              <tr *ngFor="let addsOn of addsOn">
+
+                <td class="px-2 py-4 d-flex justify-content-center">
+                  <span class="bg-transparentr flex items-center justify-center w-11 h-10 text-base antialiased">
+                    {{addsOn.featureDescription}}
+                  </span>
+                </td>
+
+                <td class="px-2 py-4">
+                  <div class="flex overflow-hidden border w-max rounded-lg">
+                    <button (click)="decrementQuantity(addsOn)" type="button" class="bg-gray-100 flex items-center justify-center w-8 h-8 font-semibold">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-current" viewBox="0 0 124 124">
+                        <path d="M112 50H12C5.4 50 0 55.4 0 62s5.4 12 12 12h100c6.6 0 12-5.4 12-12s-5.4-12-12-12z"
+                          data-original="#000000"></path>
+                      </svg>
+                    </button>
+                    <span
+                      class="bg-transparent flex items-center justify-center w-11 h-8 font-semibold text-gray-800 text-base">
+                      {{addsOn.defaultValue}}
+                    </span>
+                    <button (click)="incrementQuantity(addsOn)" type="button"
+                      class="bg-gray-800 text-white flex items-center justify-center w-8 h-8 font-semibold">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-current" viewBox="0 0 42 42">
+                        <path
+                          d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z"
+                          data-original="#000000"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+
+                <td class="px-2 py-4">
+                  <h4 class="text-base font-bold text-gray-800 antialiased">{{addsOn.pricePerUnit}}</h4>
+                </td>
+
+                <td class="px-2 py-4">
+                  <button type="button" (click)="addThisAddsOn(addsOn)"
+                    class="px-3 mx-1 border btn btn-outline-secondary flex items-center justify-center w-11 h-10 rounded-lg antialiased">
+                    <i class="bi bi-plus-lg"></i>
+                  </button>
+                </td>
+
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="font-sans col-5 my-3">
+          <div class="d-flex justify-content-start editProfile py-2 fs-4">Pending</div>
+          <table class="mt-12 w-full border-collapse divide-y">
+
+            <thead class="whitespace-nowrap text-left">
+              <tr>
+
+                <th class="text-base text-gray-500 font-medium p-2">Feature Name</th>
+                <th class="text-base text-gray-500 font-medium p-2">Quantity</th>
+                <th class="text-base text-gray-500 font-medium p-2">Total Price</th>
+                <th class="text-base text-gray-500 font-medium p-2"></th>
+              </tr>
+            </thead>
+
+            <tbody class="whitespace-nowrap divide-y">
+              <tr *ngFor="let SubAddsOn of SubscriptionAddsOn">
+                <ng-container *ngIf="!SubAddsOn.isInvoiced">
+                <td class="px-2 py-4 d-flex justify-content-center">
+                  <span class="bg-transparentr flex items-center justify-center w-11 h-10 text-base antialiased">
+                    {{SubAddsOn.featureDescription}}
+                  </span>
+                </td>
+
+                <td class="px-2 py-4">
+                  <span class="bg-transparentr flex items-center justify-center w-11 h-10 text-base antialiased">
+                    {{SubAddsOn.featureQty}}
+                  </span>
+                </td>
+
+                <td class="px-2 py-4">
+                  <h4 class="text-base font-bold text-gray-800 antialiased">{{SubAddsOn.totalPrice}}</h4>
+                </td>
+                <td class="px-2 py-4 d-flex">
+                  <button type="button" (click)="payAddOn(SubAddsOn)"
+                    class="px-3 mx-1 border btn btn-outline-success flex items-center justify-center w-11 h-10 rounded-lg antialiased">
+                    Pay
+                  </button>
+                  <button type="button" (click)="deletePendingAddOn(SubAddsOn)"
+                  class="px-3 mx-1 border btn btn-outline-danger flex items-center justify-center w-11 h-10 rounded-lg antialiased">
+                  <i class="bi bi-trash"></i>
+                </button>
+                </td>
+                </ng-container>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="mb-4 grid col-12 px-2">
+        <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md overflow-hidden xl:col-span-2">
+          <div class="relative bg-clip-border rounded-xl overflow-hidden bg-transparent text-gray-700 shadow-none m-0 flex items-center justify-between p-6">
+            <div>
+              <h6 class=" editProfile">Current AddsOn</h6>
+            </div>
+          </div>
+          <div class="p-6 overflow-x-auto px-0 pt-0 pb-2">
+            <table class="w-full table-auto">
+              <thead>
+                <tr>
+                  <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
+                    <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">Id</p>
+                  </th>
+                  <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
+                    <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">Feature Name</p>
+                  </th>
+                  <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
+                    <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">Quantity</p>
+                  </th>
+                  <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
+                    <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">Unit Price</p>
+                  </th>
+                  <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
+                    <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">Total Price</p>
+                  </th>
+                  <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
+                    <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">Start Date</p>
+                  </th>
+                  <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
+                    <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">End Date</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let SubAddsOn of SubscriptionAddsOn">
+                  <ng-container *ngIf="SubAddsOn.isInvoiced">
+                    <td class="py-3 px-5 border-b border-blue-gray-50">
+                      <p class="block antialiased font-sans text-xs font-medium text-blue-gray-600">{{SubAddsOn.id}}</p>
+                    </td>
+                    <td class="py-3 px-5 border-b border-blue-gray-50">
+                      <div class="flex items-center gap-4">
+                        <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold">{{SubAddsOn.featureDescription}}</p>
+                      </div>
+                    </td>
+                    <td class="py-3 px-5 border-b border-blue-gray-50">
+                      <p class="block antialiased font-sans text-xs font-medium text-blue-gray-600">{{SubAddsOn.featureQty}}</p>
+                    </td>
+                    <td class="py-3 px-5 border-b border-blue-gray-50">
+                      <p class="block antialiased font-sans text-xs font-medium text-blue-gray-600">{{SubAddsOn.unitPrice}}</p>
+                    </td>
+                    <td class="py-3 px-5 border-b border-blue-gray-50">
+                      <p class="block antialiased font-sans text-xs font-medium text-blue-gray-600">{{SubAddsOn.totalPrice}}</p>
+                    </td>
+                    <td class="py-3 px-5 border-b border-blue-gray-50">
+                      <div class="w-full">
+                        <p class="antialiased font-sans mb-1 block text-xs font-medium text-blue-gray-600">{{SubAddsOn.startDate | date}}</p>
+                      </div>
+                    </td>
+                    <td class="py-3 px-5 border-b border-blue-gray-50">
+                      <div class="w-full">
+                        <p class="antialiased font-sans mb-1 block text-xs font-medium text-blue-gray-600">{{SubAddsOn.endDate | date}}</p>
+                      </div>
+                    </td>
+                  </ng-container>
+                </tr>
+                <!-- Additional rows as in the original -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

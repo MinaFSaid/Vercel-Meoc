@@ -1,0 +1,44 @@
+<div class="contaner-fluid p-4">
+    <div class="container-fluid">
+        <div class="PlanProfile">Plan & Billing</div>
+        <div *ngIf="isBills">
+            <div *ngFor="let sub of subscriptions; let i = index" class="card m-2 rounded-4 py-2">
+                <div *ngIf="isBill" class="col-12 d-flex justify-content-center py-3">
+                    <div class="col-3 px-5">
+                        <div class="smHeaders">Plan</div>
+                        <div class="xlBody">{{sub.planName}}</div>
+                    </div>
+                    <div class="col-3 px-5">
+                        <div class="smHeaders">Payment</div>
+                        <div class="xlBody">LE {{sub.totalSubscriptionPrice}} </div>
+     
+                    </div>
+                    <div *ngIf="sub.isInvoiced == true" class="col-2 d-flex align-items-center" >
+                        <div class="badge text-bg-success px-3" style="cursor: pointer;" (click)="getReceiptDetails(sub)">Invoiced</div>
+                    </div>
+                    <div *ngIf="sub.isInvoiced == false" class="col-2 d-flex align-items-center">
+                        <div class="badge text-bg-danger px-3">pending</div>
+                    </div>
+                    <div *ngIf="sub.isInvoiced == false" class="col-2 d-flex justify-content-center align-items-center">
+                        <div class="me-4 btn" style="color: red;" (click)="showDelete(sub.subscriptionId, i)">Delete Subscription</div>
+                    </div>
+                    <div *ngIf="sub.isInvoiced == true" class="col-2 d-flex justify-content-center align-items-center">
+                        <div class="me-4 btn" style="font-size: 1rem;" (click)="getThisPlan(sub)">Manage Plan</div>
+                    </div>
+                    <div class="col-2 d-flex justify-content-center align-items-center" *ngIf="sub.isInvoiced == true">
+    
+                        <button class="btn" style="background-color: #E3F5FE;" (click)="assignUsers(sub)"><i class="bi bi-person-add" style="font-size: 1.5rem;"></i></button>
+                    </div>
+                    <div class="col-2 d-flex justify-content-center align-items-center" *ngIf="sub.isInvoiced == false">
+                        <button class="btn" style="background-color: #E3F5FE;" (click)="paySubscription(sub)">Pay Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <app-iframe-container [url]="iframeUrl"></app-iframe-container>
+        <div *ngIf="!isBill" class="card m-2 rounded-4 py-2 d-flex align-items-center" style="height: 80vh;">
+            <i class="bi bi-clipboard-check" style="font-size: 20rem;opacity: .5;"></i>
+            <div class="xlBodysvg pb-4">No Plans Yet</div>
+        </div>
+    </div>
+</div>
