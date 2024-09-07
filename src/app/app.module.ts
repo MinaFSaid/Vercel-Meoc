@@ -37,6 +37,9 @@ import { SysSidebarComponent } from './core/components/sys-sidebar/sys-sidebar.c
 import { DatePipe } from '@angular/common';
 import { IframeContainerComponent } from './core/components/iframe-container/iframe-container.component';
 import { PaymentResponseComponent } from './core/components/payment-response/payment-response.component';
+import { AddsonPaymentresponseComponent } from './core/components/addson-paymentresponse/addson-paymentresponse.component';
+
+
 
 const routerOptions: ExtraOptions = {
   anchorScrolling: 'enabled',
@@ -63,7 +66,9 @@ const routerOptions: ExtraOptions = {
     SubscriptionManagmentComponent,
     SysSidebarComponent,
     IframeContainerComponent,
-    PaymentResponseComponent
+    PaymentResponseComponent,
+    AddsonPaymentresponseComponent,
+
   ],
   imports: [
     BrowserModule,

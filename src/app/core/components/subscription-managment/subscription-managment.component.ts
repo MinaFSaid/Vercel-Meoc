@@ -16,6 +16,7 @@ export class SubscriptionManagmentComponent {
   addsOn: any = [];
   SubscriptionAddsOn: any = [];
   defalt: any = { defaltValue: 1 };
+  url:any;
   addThisFeature: any = {
     "qty": 0,
     "unitPrice": 0,
@@ -30,15 +31,10 @@ export class SubscriptionManagmentComponent {
     "planAddOnsId": 0
   }
   payAddsOn:any = {
-    "totalPayment": 0,
-    "userId": 0,
-    "tenantId": 0,
-    "countryId": 0,
-    "currencyId": 0,
-    "paymentTypeId": 0,
-    "subscriptionId": 0,
-    "subscriptionAddOnId": 0
-  }
+      "subscriptionAddOnId": 0,
+      "domainName": "string"
+    }
+  
   deleteAddsOn:any = {
     "subscriptionAddsOnId": 0,
     "userId": 0
@@ -56,6 +52,7 @@ export class SubscriptionManagmentComponent {
       this._Router.navigate(['/profile/plan-Billing']);
     }
     else {
+      this.url = window.location.origin + "/profile/addsOnpayment-response";
       this._ManagmentService.getAddsOn(this.planDetails.planId).subscribe((data) => {
         this.addsOn = data.result.map((item: any) => ({
           ...item,
@@ -111,61 +108,72 @@ export class SubscriptionManagmentComponent {
 
 
   addThisAddsOn(data: any) {
-    var Ftr = "";
-    if(data.type == 1)
-      {
-        Ftr = "Feature";
-      }else{
-        Ftr = "PlanAddOn";
-      }
-    this.addThisFeature = {
-      "qty": data.defaultValue,
-      "unitPrice": data.pricePerUnit,
-      "totalPrice": data.defaultValue * data.pricePerUnit,
-      "endDate": data.planEndDate,
-      "comments": "No comments",
-      "userId": parseInt(this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("userId"))),
-      "tenantId": parseInt(this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))),
-      "subscriptionId": this.planDetails.subscriptionId,
-      "featureType": Ftr,
-      "featureId": parseInt(data.featureId),
-      "planAddOnsId": parseInt(data.id)
-    }
-      this._ManagmentService.addNewAddsOn(this.addThisFeature).subscribe({
-        next: (data) => {
-          this.showSuccess(data.result.featureDescription + " AddsOn added successfully")
-        },
-        error: (error) => {
-          console.log(error);
-          this.showfail("Couldn't add this feature, Contact Customer Service")
-        },
-        complete: () => {
-          this.getAddsOn();
+    const notInvoicedItems = this.SubscriptionAddsOn.filter((item:any) => item.isInvoiced === false);
+    if(notInvoicedItems.length >= this.addsOn.length) {
+      this.showfail("Please Pay Pending AddsOn To Continue...");
+    }else{
+      var Ftr = "";
+      if(data.type == 1)
+        {
+          Ftr = "Feature";
+        }else{
+          Ftr = "PlanAddOn";
         }
+      this.addThisFeature = {
+        "qty": data.defaultValue,
+        "unitPrice": data.pricePerUnit,
+        "totalPrice": data.defaultValue * data.pricePerUnit,
+        "endDate": data.planEndDate,
+        "comments": "No comments",
+        "userId": parseInt(this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("userId"))),
+        "tenantId": parseInt(this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))),
+        "subscriptionId": this.planDetails.subscriptionId,
+        "featureType": Ftr,
+        "featureId": parseInt(data.featureId),
+        "planAddOnsId": parseInt(data.id)
       }
-    )
+        this._ManagmentService.addNewAddsOn(this.addThisFeature).subscribe({
+          next: (data) => {
+            this.showSuccess(data.result.featureDescription + " AddsOn added successfully")
+          },
+          error: (error) => {
+            // console.log(error);
+            this.showfail("Couldn't add this feature, Contact Customer Service")
+          },
+          complete: () => {
+            this.getAddsOn();
+          }
+        }
+      )
+    }
   }
 
   payAddOn(paymentData:any){
 
     this.payAddsOn = {
-      "totalPayment": paymentData.totalPrice,
-      "userId": parseInt(this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("userId"))),
-      "tenantId": parseInt(this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))),
-      "countryId": parseInt(this._EncryptDecryptService.decryptUsingAES256(sessionStorage.getItem("CountryId"))),
-      "currencyId": paymentData.currencyId,
-      "paymentTypeId": 13,
-      "subscriptionId": this.planDetails.subscriptionId,
-      "subscriptionAddOnId": paymentData.id
-    }
+        "subscriptionAddOnId": paymentData.id,
+        "domainName": this.url
+      }
     // console.log(this.payAddsOn);
-    this._ManagmentService.payNewAddOn(this.payAddsOn).subscribe((data)=>{
-      console.log(data);
-    })
+    this._ManagmentService.payNewAddOn(this.payAddsOn).subscribe(
+      {
+        next: (data) => {
+          // console.log(data)
+          // this.showSuccess(data.result.message)
+          window.location.href = data.result.data.invoiceURL
+        },
+        error: (error) => {
+          // console.log(error)
+           this.showfail("Couldn't delete this row, Contact Customer Service")
+        },
+        complete: () => {
+          this.getAddsOn();
+        }}
+    )
   }
 
   deletePendingAddOn(deleteAddsOn: any){
-    console.log(deleteAddsOn);
+    // console.log(deleteAddsOn);
     this.deleteAddsOn = {
       "subscriptionAddsOnId": deleteAddsOn.id,
       "userId": parseInt(this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("userId"))),

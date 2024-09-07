@@ -45,15 +45,14 @@ export class ManagmentService {
     return this._HttpClient.post<any>(`${this.baseUrl}/PlanAddsOn/AddNewAddOn`, data,{ headers });
   }
 
-  payNewAddOn(data:any){
+  payNewAddOn(body:any){
     // console.log(data);
-      const body = data;
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'Abp.TenantId': `${this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))}`, // Set your custom header
         'Authorization': `Bearer ${this.token}`
       });
-      return this._HttpClient.post<any>(`${this.baseUrl}/PlanAddsOn/PayAddOn`, data,{ headers });
+      return this._HttpClient.post<any>(`${this.baseUrl}/PlanAddsOn/PaySubscriptionAddOn`, body,{ headers });
   }
 
   deletePendingAddOn(data:any){
@@ -64,5 +63,15 @@ export class ManagmentService {
       'Authorization': `Bearer ${this.token}`
     });
     return this._HttpClient.post<any>(`${this.baseUrl}/PlanAddsOn/DeleteAddOn`, data,{ headers });
+  }
+
+  paymentInquiry(data:any){
+    const body = {"userId": this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("userId")), "value": data}
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Abp.TenantId': `${this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))}`, // Set your custom header
+    'Authorization': `Bearer ${this.token}`
+  }); 
+  return this._HttpClient.post<any>(`${this.baseUrl}/PlanAddsOn/PaymentInquiry`, body,{ headers });
   }
 }

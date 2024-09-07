@@ -22,4 +22,6 @@
     text-align: left;
     color: #02455A;
 }
-
+.borderasasa{
+    border: .5px solid grey;
+}

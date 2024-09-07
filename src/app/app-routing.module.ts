@@ -16,6 +16,8 @@ import { ReceiptDetailsComponent } from './core/components/receipt-details/recei
 import { SubscriptionManagmentComponent } from './core/components/subscription-managment/subscription-managment.component';
 import { AssignUsersComponent } from './core/components/assign-users/assign-users.component';
 import { PaymentResponseComponent } from './core/components/payment-response/payment-response.component';
+import { AddsonPaymentresponseComponent } from './core/components/addson-paymentresponse/addson-paymentresponse.component';
+
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch:'full'},
   {path: '', component: LayoutComponent,children:[
@@ -35,6 +37,8 @@ const routes: Routes = [
     {path: 'subscription-managment', component: SubscriptionManagmentComponent},
     {path: 'assign-users', component: AssignUsersComponent},
     {path: 'payment-response', component: PaymentResponseComponent},
+    {path: 'addsOnpayment-response', component: AddsonPaymentresponseComponent},
+
   ]},
   {path: '**', component: NotFoundComponent},
 

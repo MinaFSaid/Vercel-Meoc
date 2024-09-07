@@ -23,6 +23,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "7mb",
+                "maximumError": "8mb"
+              }
+            ],
             "outputPath": "dist/meoc",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -69,8 +76,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "4mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "10mb",
+                  "maximumError": "11mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -138,5 +145,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

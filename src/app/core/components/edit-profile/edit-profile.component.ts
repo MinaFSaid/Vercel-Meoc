@@ -53,7 +53,7 @@ export class EditProfileComponent implements OnInit {
     this._SharedService.getUserData().subscribe({
       next: (data) => {
         this._SharedService.currentUserData = data.result;
-        // console.log(data.result)
+        // console.log(data.result) //dateeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
         this.userData = data.result;
         if(this.userData.gender == 0){
           this.isChecked = true;
@@ -71,7 +71,7 @@ export class EditProfileComponent implements OnInit {
           isActive: this.userData.isActive,
           altMail: this.userData.altEmail,
           phone2: this.userData.phoneNumber2,
-          birthDate: this.UserDataPicker(this.userData.birthDate),
+          birthDate: this.userData.birthDate,
           firstName: this.userData.firstName,
           familyName: this.userData.familyName,
           governorate: this.userData.governorate,
@@ -89,6 +89,7 @@ export class EditProfileComponent implements OnInit {
     const [day, month, year] = userdata.split('-');
     const formattedDate = new Date(`${month}/${day}/${year}`);
     this.selectedDate = formattedDate
+    console.log()
     return this.selectedDate;
   }
 
