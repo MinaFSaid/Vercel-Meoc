@@ -25,8 +25,8 @@ export class ReceiptsComponent implements OnInit {
 
   getReceipts() {
     this._SubscriptionService.getReceipts().subscribe((Receipts) => {
-      console.log(Receipts.result.reverse())
-      this.Receipts = Receipts.result;
+      this.Receipts = Receipts.result.reverse();
+      // console.log(this.Receipts);
       this.isloading = true;
       if(this.Receipts.length > 0){
         this.isRecept = true;

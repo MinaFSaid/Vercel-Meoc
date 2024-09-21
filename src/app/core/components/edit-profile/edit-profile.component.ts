@@ -8,6 +8,19 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import Swal from 'sweetalert2'
 import { DatePipe } from '@angular/common';
 
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'DD/MM/YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -53,8 +66,9 @@ export class EditProfileComponent implements OnInit {
     this._SharedService.getUserData().subscribe({
       next: (data) => {
         this._SharedService.currentUserData = data.result;
-        // console.log(data.result) //dateeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+         //console.log(data.result) //dateeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
         this.userData = data.result;
+        const formattedBirthDate = this.userData.birthDate ? new Date(this.userData.birthDate) : null;
         if(this.userData.gender == 0){
           this.isChecked = true;
         }else{
@@ -71,7 +85,7 @@ export class EditProfileComponent implements OnInit {
           isActive: this.userData.isActive,
           altMail: this.userData.altEmail,
           phone2: this.userData.phoneNumber2,
-          birthDate: this.userData.birthDate,
+          birthDate: formattedBirthDate,
           firstName: this.userData.firstName,
           familyName: this.userData.familyName,
           governorate: this.userData.governorate,
@@ -89,7 +103,6 @@ export class EditProfileComponent implements OnInit {
     const [day, month, year] = userdata.split('-');
     const formattedDate = new Date(`${month}/${day}/${year}`);
     this.selectedDate = formattedDate
-    console.log()
     return this.selectedDate;
   }
 

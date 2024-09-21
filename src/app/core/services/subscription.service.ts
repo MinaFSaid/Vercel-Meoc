@@ -157,4 +157,30 @@ export class SubscriptionService {
     });
     return this._HttpClient.post<any>(`${this.baseUrl}/Subscription/DeleteUserFromClinic`, body, { headers })
   }
+
+  GetSubscriptionClinicsWotName(subId: any) {
+    const params = new HttpParams().set('SubscriptionId', subId);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Abp.TenantId': `${this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))}`, // Set your custom header
+      'Authorization': `Bearer ${this.token}`
+    });
+
+    return this._HttpClient.get<any>(`${this.baseUrl}/Subscription/GetSubscriptionClinicsWotName`, { params, headers });
+  }
+
+  setClinicName(ClinicId: any, ClinicName:any) {
+    const body = {
+      "ClinicId": ClinicId,
+      "ClinicName": ClinicName
+    }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Abp.TenantId': `${this._EncryptDecryptService.decryptUsingAES256(localStorage.getItem("tenantId"))}`, // Set your custom header
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this._HttpClient.post<any>(`${this.baseUrl}/Subscription/SetClinicName`, body ,{ headers });
+  }
+  
 }

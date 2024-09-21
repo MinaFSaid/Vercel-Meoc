@@ -115,10 +115,33 @@ export class PlanBillingComponent {
   }
 
   paySubscription(sub: any) {
-    this._SubscriptionService.PaySubscriptions(sub, this.url).subscribe((data) => {
-      // console.log(data.result)
-      window.location.href = data.result.data.invoiceURL
+    this._SharedCoreService.getUserData().subscribe(data => {
+      if (!data.result.userId || !data.result.emailAddress || !data.result.userName ||
+        data.result.isActive === null || !data.result.fullName || 
+        !data.result.phoneNumber || data.result.gender === null || 
+        !data.result.altEmail || !data.result.phoneNumber2 || 
+        !data.result.birthDate || !data.result.firstName || 
+        !data.result.familyName || !data.result.governorate || !data.result.address) {
+
+          
+          Swal.fire({
+            icon: "warning",
+            title: "Oops...",
+            text: "Please fill in all user information to continue",
+            showConfirmButton: false,
+            timer: 2000
+        }).then(() => {
+          this._Router.navigate(['/profile/edit-Profile']);
+        });
+          
+
+        }else{
+          this._SubscriptionService.PaySubscriptions(sub, this.url).subscribe((data) => {
+            window.location.href = data.result.data.invoiceURL
+          })
+        }
     })
+   
   }
 
 }

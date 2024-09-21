@@ -29,6 +29,7 @@ export class ReceiptDetailsComponent {
     if (this.isReceiptDataEmpty(this.receiptData)) {
       this._Router.navigate(['/profile/receipts']);
     } else {
+      // console.log(this.receiptData)
       const timestamp = this._SubscriptionService.receptDetails.startDate;
       this.startDateOnly = new Date(timestamp).toISOString().split('T')[0];
     }
@@ -49,8 +50,8 @@ export class ReceiptDetailsComponent {
        
         {
           text: [
-            { text: 'Meoc', bold: true, style: 'text', fontSize:30, color:'green'},
-            { text: '\nReciept', bold: true, style: 'text', fontSize:30},
+            { text: 'MIDDLE EAST OPHTHALMIC CLINICS', bold: true, style: 'text', fontSize:30 ,color:'#02455A'},
+            { text: '\nReciept', bold: true, style: 'text', fontSize:20},
           ],
           margin: [0, 10, 0, 30]
         },
@@ -97,10 +98,10 @@ export class ReceiptDetailsComponent {
                 { text: 'CURRENCY', style: 'tableHeader', alignment: 'center', bold: true },
               ],
               [
-                { text: this.receiptData.planDescription, style: 'text' },
+                { text: this.receiptData.planDescription, style: 'text',blod:true},
                 { text: this.separateDateTime(this.receiptData.startDate).date, alignment: 'center' },
                 { text: this.separateDateTime(this.receiptData.endDate).date, alignment: 'center' },
-                { text: this.receiptData.totalSubscriptionPrice, alignment: 'center' },
+                { text: this.receiptData.paymentStatusResponse.data.invoiceDisplayValue, alignment: 'center' },
                 { text: this.receiptData.currencyDescription, alignment: 'center' },
               ]
             ]
@@ -121,7 +122,7 @@ export class ReceiptDetailsComponent {
                     { text: '', bold: true, style: '', alignment: 'right'},
                     { text: '', bold: true, style: '', alignment: 'right'},
                     { text: 'Total :', bold: true, style: 'label', alignment: 'right', fontSize:15},
-                    { text: this.receiptData.totalSubscriptionPrice +' '+ this.receiptData.currencyDescription, bold: true, alignment: 'right', color: 'green',fontSize:20 }
+                    { text: this.receiptData.paymentStatusResponse.data.invoiceDisplayValue , bold: true, alignment: 'right', color: 'green',fontSize:18 }
                   ]
                 }
               ]
@@ -143,7 +144,7 @@ export class ReceiptDetailsComponent {
           margin: [0, 0, 0, 20]
         },
         {
-          text: 'Notes',
+          text: 'Details',
       style: 'label',
       margin: [0, 0, 0, 5]
         },

@@ -28,7 +28,7 @@
               Sign In
             </button>
           </div>
-          <div *ngIf="isLogin" class="col-3 d-flex align-items-center px-2 justify-content-center">
+          <div *ngIf="isLogin" class="col-2 d-flex align-items-center px-2 justify-content-center">
               <div class="circular_image mx-2">
                   <img src="../../../../assets/Images/userd.jpeg" width="100%"/>
               </div>
@@ -36,14 +36,10 @@
               <div class="ms-4 d-flex">
                   <i class="bi bi-gear" routerLink="/profile" style="cursor: pointer;"></i>
               </div>
-              <div class="ms-5" style="cursor: pointer; color:red" (click)="logout()">SignOut</div>
+              
           </div>
-          <div class="col-2 d-flex justify-content-center align-items-center">
-              <div>
-                  <select class="form-select border-0" #ddlViewBy (change)="onSelectionChange()">
-                      <option *ngFor="let country of countryData" value="{{country.menuItemId}}">{{country.description}}</option>
-                    </select>
-              </div>
+          <div class="col-3 d-flex justify-content-center align-items-center">
+            <div class="ms-5" style="cursor: pointer; color:red" (click)="logout()">SignOut</div>
           </div>
         </div>
       </div>

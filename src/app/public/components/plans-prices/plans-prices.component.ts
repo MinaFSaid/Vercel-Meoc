@@ -37,6 +37,7 @@ export class PlansPricesComponent {
 
       this._PlanPricesService.getPlansPrices(value).subscribe((plans) => {
         this.plans = plans.result.planObject
+        // console.log(this.plans);
         this.isloading = true;
       })
     });

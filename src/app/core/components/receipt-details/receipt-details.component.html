@@ -5,21 +5,20 @@
                 routerLink="/profile/receipts"></i>
             <div class="ReceiptsProfile">Receipt Details</div>
         </div>
-        <div class="card m-2 rounded-4 py-2 d-flex align-items-center justify-content-center">
-            <div class="d-flex justify-content-center py-3 rounded-4 my-3 sections col-9"
+        <div class="container-fluid card m-2 rounded-4 py-2 d-flex align-items-center justify-content-center">
+            <div class="container-fluid d-flex justify-content-center py-3 rounded-4 my-3 sections col-9"
                 style="background-color: #F6F8FC;">
-                <div class="col-4 d-flex flex-column align-items-center justify-content-center ps-3">
+                <div class="col-4 d-flex flex-column align-items-center justify-content-center px-2">
                     <div class="logo">MIDDLE EAST</div>
                     <div class="slogen">OPHTHALMIC CLINICS</div>
                 </div>
-                <div class="col-3 shadow rounded-4 mx-5 p-2 ps-3 d-flex flex-column justify-content-center"
+                <div class="col-4 shadow rounded-4 px-3 d-flex flex-column justify-content-center mx-3"
                     style="background-color: white;">
                     <div class="opacityHeaders mb-1">Amount Due</div>
-                    <div class="headerPrice py-2">{{receiptData.totalSubscriptionPrice}}
-                        {{receiptData.currencyDescription}}</div>
+                    <div class="headerPrice py-2">{{receiptData.paymentStatusResponse.data?.invoiceDisplayValue}}</div>
                     <div class="opacityHeaders mt-1">{{startDateOnly}}</div>
                 </div>
-                <div class="col-4 d-flex flex-column justify-content-center ps-3 me-3">
+                <div class="col-4 d-flex flex-column justify-content-center ps-4">
                     <div class="opacityHeaders py-1">Invoice To:</div>
                     <div class="userName py-1">{{userData.fullName}}</div>
                     <div class="opacityHeaders py-1">{{userData.phoneNumber}}</div>
@@ -29,56 +28,49 @@
 
             <div class="col-9 invDetails mt-4">INVOICE DETAILS</div>
 
-            <div class="d-flex justify-content-center py-3 rounded-4 my-3 sections col-9 shadow">
-                <div class="col-4 d-flex flex-column justify-content-center ms-3 ps-5">
+            <div class="container-fluid d-flex justify-content-center py-3 rounded-4 my-3 sections col-9 shadow">
+                <div class="col-4 d-flex flex-column justify-content-center px-2">
                     <div class="invoiceHeaderDetails mb-2">INVOICE NUMBER:</div>
-                    <div class="invoiceBodyDetails py-2">{{receiptData.subscriptionId }}</div>
+                    <div class="invoiceBodyDetails py-2">{{receiptData.paymentStatusResponse.data.invoiceId}}</div>
                 </div>
-                <div class="col-3 rounded-4 mx-5 p-2 ps-3 d-flex flex-column justify-content-center ps-5 ">
+                <div class="col-3 rounded-4 mx-3 d-flex flex-column justify-content-center px-3 ">
                     <div class="invoiceHeaderDetails mb-2">ISSUED:</div>
-                    <div class="invoiceBodyDetails py-2">{{startDateOnly}}</div>
+                    <div class="invoiceBodyDetails py-2">{{receiptData.paymentStatusResponse.data.createdDate | date}}</div>
 
                 </div>
-                <div class="col-4 d-flex flex-column justify-content-center ps-5 me-3">
+                <div class="col-4 d-flex flex-column justify-content-center px-2">
                     <div class="invoiceHeaderDetails mb-2">TOTAL AMOUNT:</div>
-                    <div class="headerPrice py-1">{{receiptData.totalSubscriptionPrice}}
-                        {{receiptData.currencyDescription}}</div>
+                    <div class="headerPrice py-1">{{receiptData.paymentStatusResponse.data.invoiceDisplayValue}}</div>
 
                 </div>
             </div>
 
-            <div class="d-flex justify-content-center sections col-9 mt-5">
-                <div class="col-4 d-flex flex-column justify-content-center ms-3 ps-5">
+            <div class="container-fluid d-flex justify-content-center sections col-10 mt-5">
+                <div class="col-3 d-flex flex-column justify-content-center ms-3 ps-5">
                     <div class="invoiceBodyDetails mb-2">DESCRIPTION</div>
                 </div>
-                <div class="col-2 rounded-4 mx-2 p-2 ps-3 d-flex flex-column justify-content-center ps-5 ">
-                    <div class="invoiceBodyDetails mb-2">DIS</div>
+                <div class="col-3 rounded-4 mx-2 p-2 ps-3 d-flex flex-column justify-content-center ps-5 ">
+                    <div class="invoiceBodyDetails mb-2">Start Date</div>
                 </div>
-                <div class="col-2 d-flex flex-column justify-content-center ps-5">
-                    <div class="invoiceBodyDetails mb-2">QTY</div>
+                <div class="col-3 d-flex flex-column justify-content-center ps-5">
+                    <div class="invoiceBodyDetails mb-2">End Date</div>
                 </div>
-                <div class="col-2 d-flex flex-column justify-content-center ps-5">
-                    <div class="invoiceBodyDetails mb-2">PRICE</div>
-                </div>
-                <div class="col-2 d-flex flex-column justify-content-center ps-5 me-5">
+                <div class="col-3 d-flex flex-column justify-content-center ps-5 me-5">
                     <div class="invoiceBodyDetails mb-2">TOTAL</div>
                 </div>
             </div>
-            <div class="d-flex justify-content-center py-3  sections col-9 border-radius-top">
-                <div class="col-4 d-flex flex-column justify-content-center ms-3 ps-5">
+            <div class="container-fluid d-flex justify-content-center py-3  sections col-10 border-radius-top">
+                <div class="col-3 d-flex flex-column justify-content-center ms-3 ps-5">
                     <div class="slogen mb-2">{{receiptData.planDescription}}</div>
                 </div>
-                <div class="col-2 rounded-4 mx-2 p-2 ps-3 d-flex flex-column justify-content-center ps-5 ">
-                    <div class="invoiceHeaderDetails mb-2">DIS</div>
+                <div class="col-3 rounded-4 mx-2 p-2 ps-3 d-flex flex-column justify-content-center ps-5 ">
+                    <div class="invoiceHeaderDetails mb-2">{{receiptData.startDate | date}}</div>
                 </div>
-                <div class="col-2 d-flex flex-column justify-content-center ps-5">
-                    <div class="invoiceHeaderDetails mb-2">QTY</div>
+                <div class="col-3 d-flex flex-column justify-content-center ps-5">
+                    <div class="invoiceHeaderDetails mb-2">{{receiptData.endDate | date}}</div>
                 </div>
-                <div class="col-2 d-flex flex-column justify-content-center ps-5">
-                    <div class="invoiceHeaderDetails mb-2">{{receiptData.totalSubscriptionPrice}}</div>
-                </div>
-                <div class="col-2 d-flex flex-column justify-content-center ps-5 me-5">
-                    <div class="invoiceHeaderDetails mb-2">{{receiptData.totalSubscriptionPrice}} {{receiptData.currencyDescription}}</div>
+                <div class="col-3 d-flex flex-column justify-content-center ps-5 me-5">
+                    <div class="invoiceHeaderDetails mb-2">{{receiptData.paymentStatusResponse.data.invoiceDisplayValue}}</div>
                 </div>
             </div>
 

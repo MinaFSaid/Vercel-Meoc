@@ -5,7 +5,7 @@
             <!-- <span class="cardPlans">{{plans.planDescription}}</span> -->
         </div>
         <div class="container d-flex px-5">
-            <div class="col-4 me-2 card p-2 mt-3" >
+            <div class="col-4 me-2 card p-2 mt-3">
                 <div class="cardPlansMo mt-3" style="background-color:#EAF5FE ;">{{plans.planDescription}}</div>
                 <hr />
                 <div class="cardPlansMos pb-4">Capacity</div>
@@ -27,15 +27,15 @@
                     <br />
                 </div>
             </div>
-            <div class="col-4 card px-2 mt-3" >
+            <div class="col-4 card px-2 mt-3">
                 <div class="cardPlansMos pt-3">Select your billing</div>
                 <div class="d-flex flex-column">
                     <div class="form-check d-flex justify-content-between mt-4">
                         <label class="form-check-label col-6 px-2" for="monthlyBilling">
                             Monthly Billing
                         </label>
-                        <input class="form-check-input col-6 mx-3" type="radio" name="billingType" id="monthlyBilling" checked
-                            (change)="onBillingTypeChange('monthly')">
+                        <input class="form-check-input col-6 mx-3" type="radio" name="billingType" id="monthlyBilling"
+                            checked (change)="onBillingTypeChange('monthly')">
                     </div>
                     <div class="form-check d-flex justify-content-between mt-3">
                         <label class="form-check-label col-6 px-2" for="annuallyBilling">
@@ -47,15 +47,15 @@
                 </div>
                 <hr />
                 <div class="cardPlansMos pb-3">Customize Members & Clinics</div>
-                <!-- <div *ngFor="let Feature of plans.planFeature" class="d-flex flex-column align-items-center py-2"> -->
+
                 <div class="d-flex flex-column justify-content-center align-items-center">
                     <div class="py-2">Number Of {{plans.planFeature[0].featureDescription}}</div>
-                    <div class="input-group mb-3 w-25">
+                    <div class="input-group mb-3" style="width: 28%;">
                         <button class="btn btn-outline-secondary" type="button" (click)="decrementF1(quantityInputF1)"
                             style="background-color: #02455A; color: white;"
                             [disabled]="isMinQuantityReachedF1(quantityInputF1, plans.planFeature[0].minQuantity)">-</button>
                         <input #quantityInputF1 type="text" class="form-control inputs" aria-label="Quantity"
-                        [(ngModel)]="f1Value"
+                            style="text-align:center;" [(ngModel)]="f1Value"
                             value="{{plans.planFeature[0].minQuantity}}" readonly>
                         <button class="btn btn-outline-secondary" type="button"
                             (click)="incrementF1(quantityInputF1, plans.planFeature[0].maxQuantity)"
@@ -63,22 +63,21 @@
                             style="background-color: #02455A; color: white;">+</button>
                     </div>
                 </div>
-
-                <div  class="d-flex flex-column justify-content-center align-items-center">
+                <div class="d-flex flex-column justify-content-center align-items-center">
                     <div class="py-2">Number Of {{plans.planFeature[1].featureDescription}}</div>
-                    <div class="input-group mb-3 w-25">
+                    <div class="input-group mb-3" style="width: 28%;">
                         <button class="btn btn-outline-secondary" type="button" (click)="decrementF2(quantityInputF2)"
                             style="background-color: #02455A; color: white;"
                             [disabled]="isMinQuantityReachedF2(quantityInputF2, plans.planFeature[1].minQuantity)">-</button>
                         <input #quantityInputF2 type="text" class="form-control inputs" aria-label="Quantity"
-                            value="{{plans.planFeature[1].minQuantity}}" readonly>
+                            style="text-align:center;" value="{{plans.planFeature[1].minQuantity}}" readonly>
                         <button class="btn btn-outline-secondary" type="button"
                             (click)="incrementF2(quantityInputF2, plans.planFeature[1].maxQuantity)"
                             [disabled]="isMaxQuantityReachedF2(quantityInputF2, plans.planFeature[1].maxQuantity)"
                             style="background-color: #02455A; color: white;">+</button>
                     </div>
                 </div>
-                <!-- </div> -->
+               
 
             </div>
 
@@ -86,23 +85,28 @@
                 <i class="bi bi-caret-right-fill" style="color: #02455A;font-size: 3rem"></i>
             </div>
 
-            <div class="col-3 card px-2 mt-3" >
+            <div class="col-3 card px-2 mt-3">
                 <div class="cardPlansMo d-flex align-items-center justify-content-center pt-3">Total Plan Price</div>
                 <hr />
                 <!-- <div class="cardPlansMos pb-3">Price</div> -->
-                <div class="d-flex justify-content-center cardPlans pt-5" style="font-weight: 700; font-size: xx-large;">
-                    {{displayTotalPrice}} <span *ngIf="monthly" class="cardPlansMo">/mo</span><span *ngIf="!monthly" class="cardPlansMo">/yr</span>
+                <div class="d-flex justify-content-center cardPlans pt-5"
+                    style="font-weight: 700; font-size: xx-large;">
+                    {{displayTotalPrice}} <span *ngIf="monthly" class="cardPlansMo">/mo</span><span *ngIf="!monthly"
+                        class="cardPlansMo">/yr</span>
                 </div>
                 <div class="d-flex justify-content-center cardPlansMos">OR</div>
-                <div *ngIf="monthly" class="d-flex justify-content-center cardPlans " style="font-weight: 600; font-size:medium;">
+                <div *ngIf="monthly" class="d-flex justify-content-center cardPlans "
+                    style="font-weight: 600; font-size:medium;">
                     {{displayTotalPrice * 12 * .7}} <span class="">/yr</span>
                 </div>
-                <div *ngIf="!monthly" class="d-flex justify-content-center cardPlans" style="font-weight: 600; font-size: medium;">
+                <div *ngIf="!monthly" class="d-flex justify-content-center cardPlans"
+                    style="font-weight: 600; font-size: medium;">
                     {{ calculateMonthlyPrice(displayTotalPrice) }} <span>/mo</span>
                 </div>
                 <div class="d-flex flex-column mt-5">
                     <div class=" d-flex justify-content-center mt-5">
-                        <button class="button px-5 py-2 rounded-4 col-10" (click)="createSubscription()">Add This Plan</button>
+                        <button class="button px-5 py-2 rounded-4 col-10" (click)="createSubscription()">Add This
+                            Plan</button>
                     </div>
                     <div class=" d-flex justify-content-center my-3">
                         <button class=" px-5 py-2 rounded-4 col-10" routerLink="/Plans">Change This Plan</button>

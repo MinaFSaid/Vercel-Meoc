@@ -48,7 +48,7 @@
 
 .headerPrice {
     font-family: Roboto;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 600;
     line-height: 28.84px;
     color: #19213D;
@@ -90,3 +90,6 @@
     border-top-right-radius: 1.2rem;
     border-bottom: 1px solid #02455A;
   }
+  /* div{
+    border: 1px solid #191919;
+  } */
